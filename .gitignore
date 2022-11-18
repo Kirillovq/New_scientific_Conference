@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Файл базы данных
+base.db
+
+# Файл PyCharm
+.idea
