@@ -1,17 +1,12 @@
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER NOT NULL PRIMARY KEY,
-    login VARCHAR(100) NOT NULL UNIQUE
-    password VARCHAR(100) NOT NULL);
-
 CREATE TABLE IF NOT EXISTS staff(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
     name VARCHAR(15) NOT NULL,
     surname VARCHAR(20) NOT NULL,
     code_departments VARCHAR(100) NOT NULL,
     positions VARCHAR(100) NOT NULL,
-    scientific_degree VARCHAR(100) NOT NULL
-    FOREIGN KEY(code_departaments)
-        REFERENCES departaments(id)
+    scientific_degree VARCHAR(100) NOT NULL,
+    FOREIGN KEY (code_departments)
+        REFERENCES department(id)
         ON DELETE SET NULL ON UPDATE NO ACTION,
     FOREIGN KEY (scientific_degree)
         REFERENCES degree(id)
@@ -29,10 +24,7 @@ CREATE TABLE IF NOT EXISTS conference(
     code_plan INTEGER NOT NULL,
     code_report INTEGER NOT NULL,
     code_order INTEGER NOT NULL,
-    code_sections INTEGER NOT NULL
-    FOREIGN KEY (departaments)
-        REFERENCES code_departaments(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION,
+    code_sections INTEGER NOT NULL,
     FOREIGN KEY (code_type_provedenie)
         REFERENCES type_conference(id)
         ON DELETE SET NULL ON UPDATE NO ACTION,
@@ -54,7 +46,7 @@ CREATE TABLE IF NOT EXISTS universities(
     email VARCHAR(100) NOT NULL,
     code_faculty INTEGER NOT NULL,
     code_city INTEGER NOT NULL,
-    number_of_universities INTEGER NOT NULL
+    number_of_universities INTEGER NOT NULL,
     FOREIGN KEY (code_faculty)
         REFERENCES faculty(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
@@ -64,10 +56,10 @@ CREATE TABLE IF NOT EXISTS faculty(
     name_faculty VARCHAR(100) NOT NULL,
     telephone INTEGER NOT NULL,
     email VARCHAR(100) NOT NULL,
-    code_departaments INTEGER NOT NULL
-    FOREIGN KEY (code_departaments)
-        REFERENCES departaments(id)
-    ON DELETE SET NULL ON UPDATE NO ACTION);
+    code_departments INTEGER NOT NULL,
+    FOREIGN KEY (code_departments)
+        REFERENCES departments(id)
+        ON DELETE SET NULL ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS departments(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
@@ -80,14 +72,8 @@ CREATE TABLE IF NOT EXISTS students(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
     FIO VARCHAR(100) NOT NULL,
     code_department INTEGER NOT NULL,
-    code_gruop VARCHAR(100) NOT NULL,
-    date_of_birth DATE NOT NULL
-    FOREIGN KEY (code_department)
-        REFERENCES departaments(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION,
-    FOREIGN KEY (code_gruop)
-        REFERENCES gruop(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION);
+    code_group VARCHAR(100) NOT NULL,
+    date_of_birth DATE NOT NULL);
 
 CREATE TABLE IF NOT EXISTS academic_degrees(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
@@ -95,7 +81,7 @@ CREATE TABLE IF NOT EXISTS academic_degrees(
 
 CREATE TABLE IF NOT EXISTS approving(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
-    code_employee INTEGER NOT NULL
+    code_employee INTEGER NOT NULL,
     FOREIGN KEY (code_employee)
         REFERENCES staff(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
@@ -112,7 +98,7 @@ CREATE TABLE IF NOT EXISTS plans(
 CREATE TABLE IF NOT EXISTS sections(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
     name_sections VARCHAR(100) NOT NULL,
-    code_doclada INTEGER NOT NULL
+    code_doclada INTEGER NOT NULL,
     FOREIGN KEY (code_doclada)
         REFERENCES doclad(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
@@ -120,7 +106,7 @@ CREATE TABLE IF NOT EXISTS sections(
 CREATE TABLE IF NOT EXISTS doclad(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
     topic_doclad VARCHAR(100) NOT NULL,
-    code_students INTEGER NOT NULL
+    code_students INTEGER NOT NULL,
     FOREIGN KEY (code_students)
         REFERENCES students(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
@@ -132,4 +118,34 @@ INSERT INTO users(login, password)
 VALUES ('login','password'),('login1','password1');
 
 INSERT INTO staff(name, surname)
-VALUES ('name','surname','departaments','positions','scientific_degree'),('name1','surname1','departaments1','positions1','scientific_degree1');
+VALUES ('name','surname','departments','positions','scientific_degree'),('name1','surname1','departments1','positions1','scientific_degree1');
+
+INSERT INTO conference(name_conference, code_department, code_director, nachalo_provedenie, konec_provedenie, code_type_provedenie, classroom, code_plan, code_report, code_order, code_sections)
+VALUES ('name_conference1','code_department1','code_director1','nachalo_provedenie1','konec_provedenie1','code_type_provedenie1','classroom1','code_plan1','code_order1','code_sections1');
+
+INSERT INTO universities(name_university, telephone, address, email, code_faculty, code_city,number_of_universities)
+VALUES ('name_university', 'telephone', 'address', 'email', 'code_faculty', 'code_city','number_of_universities'),('name_university1', 'telephone1', 'address1', 'email1', 'code_faculty1', 'code_city1','number_of_universities1');
+
+INSERT INTO faculty(name_faculty, telephone, email, code_departments)
+VALUES ('name_faculty', 'telephone', 'email', 'code_departments'),('name_faculty1', 'telephone1', 'email1', 'code_departments1');
+
+INSERT INTO students(FIO, code_departament,code_group,date_of_birth)
+VALUES ('FIO', 'code_departament','code_group','date_of_birth'),('FIO1', 'code_departament1','code_group1','date_of_birth1');
+
+INSERT INTO academic_degrees(scientific_degree)
+VALUES ('scientific_degree'),('scientific_degree1');
+
+INSERT INTO approving(code_employee)
+VALUES ('code_employee'),('code_employee');
+
+INSERT INTO type_conference(type_conference)
+VALUES ('type_conference'),('type_conference1');
+
+INSERT INTO plans(code_provedenie, calendar_year)
+VALUES ('code_provedenie','calendar_year'),('code_provedenie1','calendar_year1');
+
+INSERT INTO sections (name_sections, code_doclada)
+VALUES ('name_sections', 'code_doclada'),('name_sections1', 'code_doclada1');
+
+INSERT INTO doclad (topic_doclad, code_students)
+VALUES ('topic_doclad, code_students'),('topic_doclad1, code_students1');
