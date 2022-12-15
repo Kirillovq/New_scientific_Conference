@@ -1,13 +1,17 @@
-from fastap1 import FastAPI
+from fastapi import FastAPI
 from sql_base import base_worker
 from settings import BASE_PATH
-from routers.students import stud_router
+from routers.staff import staff_router
+from routers.subjects import subj_router
 
 
 base_worker.set_base_path(BASE_PATH)
 
-in not base_worker.check_base():
+if not base_worker.check_base():
     base_worker.create_base('../sql/base.sql')
 
 app = FastAPI()
-app.include_router(stud_router, prefix='/conferentce')
+
+
+app.include_router(staff_router, prefix='/staff')
+app.include_router(subj_router, prefix='/subjects')

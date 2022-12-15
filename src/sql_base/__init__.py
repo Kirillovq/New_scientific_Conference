@@ -1,1 +1,5 @@
-from .base import  check_base, create_base
+from .models import *
+from .base import BaseWorker
+
+base_worker = BaseWorker()
+
