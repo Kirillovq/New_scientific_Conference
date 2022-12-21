@@ -1,7 +1,6 @@
 CREATE TABLE post(
     id INTEGER NOT NULL PRIMARY KEY,
-    name VARCHAR(100)  NOT NULL
-);
+    name VARCHAR(100)  NOT NULL);
 
 CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY UNIQUE,
@@ -16,10 +15,7 @@ CREATE TABLE IF NOT EXISTS staff(
     positions VARCHAR(100) NOT NULL,
     scientific_degree VARCHAR(100) NOT NULL,
     FOREIGN KEY (code_departments)
-        REFERENCES department(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION,
-    FOREIGN KEY (scientific_degree)
-        REFERENCES degree(id)
+        REFERENCES departments(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS conference(

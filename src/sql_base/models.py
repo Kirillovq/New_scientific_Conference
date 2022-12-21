@@ -23,7 +23,7 @@ class staff(BaseModel):
 
 class conference(BaseModel):
     id: Optional[int]
-    name_conference: Optional[str]
+    name_conference: str
     code_department: Optional[int]
     code_director: Optional[str]
     nachalo_provedenie: Optional[str]
