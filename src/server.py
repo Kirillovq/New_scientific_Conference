@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sql_base import base_worker
 from settings import BASE_PATH
 from routers.staff import staff_router
-from routers.subjects import subj_router
+
 
 
 base_worker.set_base_path(BASE_PATH)
@@ -14,4 +14,4 @@ app = FastAPI()
 
 
 app.include_router(staff_router, prefix='/staff')
-app.include_router(subj_router, prefix='/subjects')
+

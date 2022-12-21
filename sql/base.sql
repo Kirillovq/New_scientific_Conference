@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS staff(
     scientific_degree VARCHAR(100) NOT NULL,
     FOREIGN KEY (code_departments)
         REFERENCES department(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION,
+        ON DELETE SET NULL ON UPDATE NO ACTION,pi
     FOREIGN KEY (scientific_degree)
         REFERENCES degree(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
