@@ -36,20 +36,11 @@ class BaseWorker:
         connection.commit()
         connection.close()
         return res
-def check_base(file_path: str) -> bool:
-    return os.path.exists(file_path)
 
-
-def create_base(file_path: str, sql_file: str) -> None:
-    connection = sqlite3.connect(file_path)
-    cur = connection.cursor()
-
-    with open(sql_file, 'r') as sql_file:
-        scripts = sql_file.read()
-
-    for row in scripts.split(';'):
-        try:
-            cur.execute(row)
-            connection.commit()
-        except sqlite3.Error as error:
-            print(error)
+    def insert_data(self, query: str, args: tuple[str]):
+        connection = sqlite3.connect(self.base_path, isolation_level=None)
+        cur = connection.cursor()
+        res = cur.execute(query, args).fetchone()
+        connection.commit()
+        connection.close()
+        return res

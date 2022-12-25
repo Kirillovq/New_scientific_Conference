@@ -1,3 +1,8 @@
+CREATE TABLE post(
+    id INTEGER NOT NULL PRIMARY KEY,
+    name VARCHAR(100)  NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY UNIQUE,
     login VARCHAR(50) UNIQUE NOT NULL,
@@ -12,7 +17,7 @@ CREATE TABLE IF NOT EXISTS staff(
     scientific_degree VARCHAR(100) NOT NULL,
     FOREIGN KEY (code_departments)
         REFERENCES department(id)
-        ON DELETE SET NULL ON UPDATE NO ACTION,pi
+        ON DELETE SET NULL ON UPDATE NO ACTION,
     FOREIGN KEY (scientific_degree)
         REFERENCES degree(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
@@ -116,6 +121,10 @@ CREATE TABLE IF NOT EXISTS doclad(
         REFERENCES students(id)
         ON DELETE SET NULL ON UPDATE NO ACTION);
 
+CREATE TABLE subjects(
+    id INTEGER NOT NULL PRIMARY KEY,
+    name VARCHAR(150)
+);
 
 
 
