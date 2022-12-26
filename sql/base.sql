@@ -2,10 +2,12 @@ CREATE TABLE post(
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(100)  NOT NULL);
 
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY UNIQUE,
-    login VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL);
+CREATE TABLE users(
+    id INTEGER NOT NULL PRIMARY KEY,
+    login VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    post INTEGER NOT NULL,
+    FOREIGN KEY (post) REFERENCES post(id));
 
 CREATE TABLE IF NOT EXISTS staff(
     id INTEGER NOT NULL PRIMARY KEY UNIQUE,
@@ -123,9 +125,11 @@ CREATE TABLE subjects(
 );
 
 
+INSERT INTO post(id, name)
+VALUES (1, 'Admin'), (2, 'Director');
 
-INSERT INTO users(login, password)
-VALUES ('login','password'),('login1','password1');
+INSERT INTO users(id, login, password, post)
+VALUES (1, 'admin', 'admin', 1);
 
 INSERT INTO staff(name, surname)
 VALUES ('name','surname','departments','positions','scientific_degree'),('name1','surname1','departments1','positions1','scientific_degree1');
